@@ -12,6 +12,7 @@
 		<module>gatling-jdbc</module>
 		<module>gatling-redis</module>
 		<module>gatling-http</module>
+        <module>gatling-js</module>
 		<module>gatling-app</module>
 		<module>gatling-recorder</module>
 		<module>gatling-charts</module>
@@ -164,9 +165,14 @@
 				<artifactId>gatling-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			<dependency>
+            <dependency>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-http</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
 				<groupId>io.gatling</groupId>
-				<artifactId>gatling-http</artifactId>
+				<artifactId>gatling-js</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

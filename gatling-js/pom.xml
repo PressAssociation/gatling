@@ -6,46 +6,47 @@
 		<groupId>io.gatling</groupId>
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>gatling-app</artifactId>
+	<artifactId>gatling-js</artifactId>
 	<name>${project.artifactId}</name>
-	<description>Gatling command line application</description>
+	<description>Gatling JavaScript functionnalities</description>
 
 	<properties>
 		<header.basedir>${project.parent.basedir}</header.basedir>
 	</properties>
 
 	<dependencies>
+		<!-- compile -->
 		<dependency>
 			<groupId>io.gatling</groupId>
-			<artifactId>gatling-http</artifactId>
-		</dependency>
-        <dependency>
-            <groupId>io.gatling</groupId>
-            <artifactId>gatling-js</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>io.gatling</groupId>
-			<artifactId>gatling-jdbc</artifactId>
+			<artifactId>gatling-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.gatling</groupId>
-			<artifactId>gatling-redis</artifactId>
+			<groupId>com.ning</groupId>
+			<artifactId>async-http-client</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.gatling</groupId>
-			<artifactId>gatling-charts</artifactId>
+			<groupId>org.fusesource.scalate</groupId>
+			<artifactId>scalate-core_2.10</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>io.gatling</groupId>
-			<artifactId>gatling-metrics</artifactId>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jzlib</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.github.scopt</groupId>
-			<artifactId>scopt_2.10</artifactId>
+			<groupId>io.netty</groupId>
+			<artifactId>netty</artifactId>
+		</dependency>
+
+		<!-- test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.typesafe.zinc</groupId>
-			<artifactId>zinc</artifactId>
+			<groupId>org.specs2</groupId>
+			<artifactId>specs2_2.10</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -56,16 +57,6 @@
 			<plugin>
 				<groupId>net.alchim31.maven</groupId>
 				<artifactId>scala-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>io.gatling.app.App</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
