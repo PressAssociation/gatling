@@ -23,8 +23,8 @@ import io.gatling.js.request.builder.CasperJSAttributes
  */
 case class CasperJSRequest(attributes: CasperJSAttributes) {
 
-	val CASPERJS_EXECUTABLE = Option(System.getenv("casperjs.executable")).getOrElse("/usr/local/bin/casperjs")
-	val PHANTOMJS_EXECUTABLE = Option(System.getenv("phantomjs.executable")).getOrElse("/usr/local/bin/phantomjs")
+	val CASPERJS_EXECUTABLE = Option(System.getenv("CASPERJS_EXECUTABLE")).getOrElse("casperjs")
+	val PHANTOMJS_EXECUTABLE = Option(System.getenv("PHANTOMJS_EXECUTABLE")).getOrElse("phantomjs")
 
 	val CasperEnvironment: Seq[Pair[String, String]] = Seq(
 		"CASPERJS_EXECUTABLE" -> CASPERJS_EXECUTABLE,

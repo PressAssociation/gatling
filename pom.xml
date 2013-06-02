@@ -12,7 +12,7 @@
 		<module>gatling-jdbc</module>
 		<module>gatling-redis</module>
 		<module>gatling-http</module>
-        <module>gatling-js</module>
+        <module>gatling-casperjs</module>
 		<module>gatling-app</module>
 		<module>gatling-recorder</module>
 		<module>gatling-charts</module>
@@ -172,7 +172,7 @@
             </dependency>
             <dependency>
 				<groupId>io.gatling</groupId>
-				<artifactId>gatling-js</artifactId>
+				<artifactId>gatling-casperjs</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

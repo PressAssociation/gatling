@@ -15,17 +15,20 @@
  */
 package io.gatling.js.action
 
-import io.gatling.core.action.{ Interruptable, Action }
+import io.gatling.core.action.Interruptable
 import io.gatling.core.session.{ Expression, Session }
-import akka.actor.ActorRef
-import io.gatling.core.validation.{ Success, Failure }
-import io.gatling.js.request.builder.CasperJSRequestBuilder
+import akka.actor.{ Props, ActorRef }
+import io.gatling.core.validation.Failure
 import org.casperjs.CasperJSRequest
+import io.gatling.js.async.AsyncCasperJSActor
 
 /**
  * @author Bob Browning <bob.browning@pressassociation>
  */
 class CasperJSAction(val requestName: Expression[String], val next: ActorRef, val request: CasperJSRequest) extends Interruptable {
+
+	val asyncCasperJSActorFactory = AsyncCasperJSActor.newAsyncCasperJSActorFactory(next) _
+
 	/**
 	 * Core method executed when the Action received a Session message
 	 *
@@ -36,12 +39,17 @@ class CasperJSAction(val requestName: Expression[String], val next: ActorRef, va
 
 		def sendRequest(resolvedRequestName: String) = {
 			logger.info(s"Sending request '$resolvedRequestName': scenario '${session.scenarioName}', userId #${session.userId}")
-			request.execute()
+
+			val actor = context.actorOf(Props(asyncCasperJSActorFactory(resolvedRequestName)(session)))
+
+			actor ! request
 		}
 
-		val execution = for {
-			resolvedRequestName <- requestName(session)
-		} yield sendRequest(resolvedRequestName)
+		val execution = if (request.isRunnable) {
+			for {
+				resolvedRequestName <- requestName(session)
+			} yield sendRequest(resolvedRequestName)
+		} else Failure("CasperJS is not present, ensure CASPERJS_EXECUTABLE is correctly set.")
 
 		execution match {
 			case Failure(message) =>

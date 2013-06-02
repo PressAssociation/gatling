@@ -6,9 +6,9 @@
 		<groupId>io.gatling</groupId>
 		<version>2.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>gatling-js</artifactId>
+	<artifactId>gatling-casperjs</artifactId>
 	<name>${project.artifactId}</name>
-	<description>Gatling JavaScript functionnalities</description>
+	<description>Gatling CasperJS Functionality</description>
 
 	<properties>
 		<header.basedir>${project.parent.basedir}</header.basedir>

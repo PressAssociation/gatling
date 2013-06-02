@@ -21,7 +21,7 @@
 		</dependency>
         <dependency>
             <groupId>io.gatling</groupId>
-            <artifactId>gatling-js</artifactId>
+            <artifactId>gatling-casperjs</artifactId>
         </dependency>
 		<dependency>
 			<groupId>io.gatling</groupId>

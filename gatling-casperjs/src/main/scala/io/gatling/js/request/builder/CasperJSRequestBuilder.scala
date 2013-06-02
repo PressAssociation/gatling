@@ -36,10 +36,10 @@ class CasperJSRequestBuilder(attributes: CasperJSAttributes) {
 	def copy(attributes: CasperJSAttributes = this.attributes) = new CasperJSRequestBuilder(attributes)
 
 	def arg(argument: String) = copy(
-    attributes.copy(arguments = argument :: attributes.arguments))
+		attributes.copy(arguments = argument :: attributes.arguments))
 
 	def option(option: Pair[String, String]) = copy(
-    attributes.copy(arguments = "--%s=%s".format(option._1, option._2) :: attributes.arguments))
+		attributes.copy(arguments = "--%s=%s".format(option._1, option._2) :: attributes.arguments))
 
 	private[gatling] def build = CasperJSRequest(attributes)
 
