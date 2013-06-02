@@ -32,7 +32,7 @@ object AsyncCasperJSActor {
 }
 
 /**
- * @author Bob Browning <bob.browning@pressassociation>
+ * @author Bob Browning"
  */
 class AsyncCasperJSActor(var session: Session, next: ActorRef, requestName: String) extends BaseActor {
 

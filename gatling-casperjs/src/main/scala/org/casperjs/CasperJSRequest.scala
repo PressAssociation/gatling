@@ -19,29 +19,12 @@ import scala.sys.process._
 import io.gatling.js.request.builder.CasperJSAttributes
 
 /**
- * @author Bob Browning <bob.browning@pressassociation>
+ * @author Bob Browning"
  */
-case class CasperJSRequest(attributes: CasperJSAttributes) {
+case class CasperJSRequest(attributes: CasperJSAttributes, client: CasperJSClient = CasperJSClient.default) {
 
-	val CASPERJS_EXECUTABLE = Option(System.getenv("CASPERJS_EXECUTABLE")).getOrElse("casperjs")
-	val PHANTOMJS_EXECUTABLE = Option(System.getenv("PHANTOMJS_EXECUTABLE")).getOrElse("phantomjs")
+	def execute() = client.execute(attributes)
 
-	val CasperEnvironment: Seq[Pair[String, String]] = Seq(
-		"CASPERJS_EXECUTABLE" -> CASPERJS_EXECUTABLE,
-		"PHANTOMJS_EXECUTABLE" -> PHANTOMJS_EXECUTABLE)
-
-	def execute() =
-		Process(
-			CASPERJS_EXECUTABLE :: attributes.pathToFile :: attributes.arguments, None, CasperEnvironment: _*).!
-
-	def execute(p: ProcessLogger) =
-		Process(
-			CASPERJS_EXECUTABLE :: attributes.pathToFile :: attributes.arguments, None, CasperEnvironment: _*).!(p)
-
-	def isRunnable: Boolean = try {
-		execute(ProcessLogger((log: String) => {})) == 0
-	} catch {
-		case _: Throwable => false
-	}
+	def execute(p: ProcessLogger) = client.execute(attributes, p)
 
 }

@@ -22,7 +22,7 @@ import io.gatling.core.util.TimeHelper.nowMillis
 import scala.sys.process.ProcessLogger
 
 /**
- * @author Bob Browning <bob.browning@pressassociation>
+ * @author Bob Browning"
  */
 
 sealed case class Response(out: Seq[String], err: Seq[String],

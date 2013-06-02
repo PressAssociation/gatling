@@ -23,7 +23,7 @@ import org.casperjs.CasperJSRequest
 import io.gatling.js.async.AsyncCasperJSActor
 
 /**
- * @author Bob Browning <bob.browning@pressassociation>
+ * @author Bob Browning"
  */
 class CasperJSAction(val requestName: Expression[String], val next: ActorRef, val request: CasperJSRequest) extends Interruptable {
 
@@ -45,11 +45,9 @@ class CasperJSAction(val requestName: Expression[String], val next: ActorRef, va
 			actor ! request
 		}
 
-		val execution = if (request.isRunnable) {
-			for {
-				resolvedRequestName <- requestName(session)
-			} yield sendRequest(resolvedRequestName)
-		} else Failure("CasperJS is not present, ensure CASPERJS_EXECUTABLE is correctly set.")
+		val execution = for {
+			resolvedRequestName <- requestName(session)
+		} yield sendRequest(resolvedRequestName)
 
 		execution match {
 			case Failure(message) =>

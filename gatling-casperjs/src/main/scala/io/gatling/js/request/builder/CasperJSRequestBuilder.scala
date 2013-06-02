@@ -16,7 +16,7 @@
 package io.gatling.js.request.builder
 
 import io.gatling.core.session._
-import org.casperjs.CasperJSRequest
+import org.casperjs.{ CasperJSClient, CasperJSRequest }
 import io.gatling.js.action.CasperJSActionBuilder
 
 case class CasperJSAttributes(requestName: Expression[String], pathToFile: String, arguments: List[String] = Nil)
@@ -29,9 +29,11 @@ object CasperJSRequestBuilder {
 }
 
 /**
- * @author Bob Browning <bob.browning@pressassociation>
+ * @author Bob Browning"
  */
 class CasperJSRequestBuilder(attributes: CasperJSAttributes) {
+
+	require(CasperJSClient.default.isRunnable, "Could not run casperjs, try setting CASPERJS_EXECUTABLE and PHANTOMJS_EXECUTABLE environment properties.")
 
 	def copy(attributes: CasperJSAttributes = this.attributes) = new CasperJSRequestBuilder(attributes)
 
