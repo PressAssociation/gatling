@@ -20,7 +20,7 @@ import io.gatling.js.request.builder.CasperJSRequestBuilder
 import io.gatling.js.action.CasperJSActionBuilder
 
 /**
- * @author Bob Browning"
+ * @author Bob Browning
  */
 object Predef {
 

@@ -19,7 +19,7 @@ import scala.sys.process._
 import io.gatling.js.request.builder.CasperJSAttributes
 
 /**
- * @author Bob Browning"
+ * @author Bob Browning
  */
 case class CasperJSRequest(attributes: CasperJSAttributes, client: CasperJSClient = CasperJSClient.default) {
 

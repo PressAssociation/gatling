@@ -23,7 +23,7 @@ import io.gatling.js.request.builder.CasperJSRequestBuilder
 import org.casperjs.CasperJSRequest
 
 /**
- * @author Bob Browning"
+ * @author Bob Browning
  */
 object CasperJSActionBuilder {
 	def apply(requestName: Expression[String], request: CasperJSRequest) =

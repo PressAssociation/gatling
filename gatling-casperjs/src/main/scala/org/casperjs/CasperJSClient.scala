@@ -23,7 +23,7 @@ object CasperJSClient {
 }
 
 /**
- * @author Bob Browning"
+ * @author Bob Browning
  */
 class CasperJSClient {
 

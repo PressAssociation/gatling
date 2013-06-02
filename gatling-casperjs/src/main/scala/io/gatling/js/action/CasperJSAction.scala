@@ -23,7 +23,7 @@ import org.casperjs.CasperJSRequest
 import io.gatling.js.async.AsyncCasperJSActor
 
 /**
- * @author Bob Browning"
+ * @author Bob Browning
  */
 class CasperJSAction(val requestName: Expression[String], val next: ActorRef, val request: CasperJSRequest) extends Interruptable {
 

@@ -29,7 +29,7 @@ object CasperJSRequestBuilder {
 }
 
 /**
- * @author Bob Browning"
+ * @author Bob Browning
  */
 class CasperJSRequestBuilder(attributes: CasperJSAttributes) {
 
