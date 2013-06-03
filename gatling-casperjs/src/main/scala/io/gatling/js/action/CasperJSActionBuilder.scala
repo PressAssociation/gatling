@@ -20,17 +20,17 @@ import akka.actor.{ Props, ActorRef }
 import io.gatling.core.action._
 import io.gatling.core.session._
 import io.gatling.js.request.builder.CasperJSRequestBuilder
-import org.casperjs.CasperJSRequest
+import org.casperjs.{ CasperJSRequestFactory, CasperJSRequest }
 
 /**
  * @author Bob Browning
  */
 object CasperJSActionBuilder {
-	def apply(requestName: Expression[String], request: CasperJSRequest) =
+	def apply(requestName: Expression[String], request: CasperJSRequestFactory) =
 		new CasperJSActionBuilder(requestName, request)
 }
 
-class CasperJSActionBuilder(requestName: Expression[String], request: CasperJSRequest) extends ActionBuilder {
+class CasperJSActionBuilder(requestName: Expression[String], request: CasperJSRequestFactory) extends ActionBuilder {
 	/**
 	 * @param next the Action that will be chained with the Action build by this builder
 	 * @return the built Action

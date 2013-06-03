@@ -24,7 +24,9 @@ import io.gatling.js.action.CasperJSActionBuilder
  */
 object Predef {
 
-	implicit def requestBuilder2ActionBuilder(requestBuilder: CasperJSRequestBuilder): CasperJSActionBuilder = requestBuilder.toActionBuilder
+  type CasperJSOption = Pair[String, Expression[String]]
+
+  implicit def requestBuilder2ActionBuilder(requestBuilder: CasperJSRequestBuilder): CasperJSActionBuilder = requestBuilder.toActionBuilder
 
 	def casperjs(requestName: Expression[String], pathToFile: String) = CasperJSRequestBuilder.casperjs(requestName, pathToFile)
 

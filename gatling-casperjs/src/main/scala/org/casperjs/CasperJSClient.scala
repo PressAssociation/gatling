@@ -34,13 +34,13 @@ class CasperJSClient {
 		"CASPERJS_EXECUTABLE" -> CASPERJS_EXECUTABLE,
 		"PHANTOMJS_EXECUTABLE" -> PHANTOMJS_EXECUTABLE)
 
-	def execute(attributes: CasperJSAttributes) =
-		Process(
-			CASPERJS_EXECUTABLE :: attributes.pathToFile :: attributes.arguments, None, CasperEnvironment: _*).!
-
-	def execute(attributes: CasperJSAttributes, p: ProcessLogger) =
-		Process(
-			CASPERJS_EXECUTABLE :: attributes.pathToFile :: attributes.arguments, None, CasperEnvironment: _*).!(p)
+	//	def execute(attributes: CasperJSAttributes) =
+	//		Process(
+	//			CASPERJS_EXECUTABLE :: attributes.pathToFile :: attributes.arguments, None, CasperEnvironment: _*).!
+	//
+	//	def execute(attributes: CasperJSAttributes, p: ProcessLogger) =
+	//		Process(
+	//			CASPERJS_EXECUTABLE :: attributes.pathToFile :: attributes.arguments, None, CasperEnvironment: _*).!(p)
 
 	def execute(attributes: List[String]) =
 		Process(CASPERJS_EXECUTABLE :: attributes, None, CasperEnvironment: _*).!

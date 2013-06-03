@@ -21,7 +21,7 @@ import io.gatling.js.request.builder.CasperJSAttributes
 /**
  * @author Bob Browning
  */
-case class CasperJSRequest(attributes: CasperJSAttributes, client: CasperJSClient = CasperJSClient.default) {
+case class CasperJSRequest(attributes: List[String], client: CasperJSClient = CasperJSClient.default) {
 
 	def execute() = client.execute(attributes)
 

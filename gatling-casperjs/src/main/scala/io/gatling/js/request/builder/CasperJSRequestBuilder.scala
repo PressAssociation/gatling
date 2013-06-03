@@ -16,10 +16,12 @@
 package io.gatling.js.request.builder
 
 import io.gatling.core.session._
-import org.casperjs.{ CasperJSClient, CasperJSRequest }
+import org.casperjs.{ CasperJSRequestFactory, CasperJSClient, CasperJSRequest }
 import io.gatling.js.action.CasperJSActionBuilder
 
-case class CasperJSAttributes(requestName: Expression[String], pathToFile: String, arguments: List[String] = Nil)
+case class CasperJSAttributes(requestName: Expression[String], pathToFile: String,
+	arguments: List[Expression[String]] = List.empty,
+	options: List[Pair[String, Expression[String]]] = List.empty)
 
 /**
  * CasperJSRequestBuilder class companion
@@ -37,13 +39,13 @@ class CasperJSRequestBuilder(attributes: CasperJSAttributes) {
 
 	def copy(attributes: CasperJSAttributes = this.attributes) = new CasperJSRequestBuilder(attributes)
 
-	def arg(argument: String) = copy(
+	def arg(argument: Expression[String]) = copy(
 		attributes.copy(arguments = argument :: attributes.arguments))
 
-	def option(option: Pair[String, String]) = copy(
-		attributes.copy(arguments = "--%s=%s".format(option._1, option._2) :: attributes.arguments))
+	def option(option: Pair[String, Expression[String]]) = copy(
+		attributes.copy(options = option :: attributes.options))
 
-	private[gatling] def build = CasperJSRequest(attributes)
+	private[gatling] def build = CasperJSRequestFactory(attributes)
 
 	private[gatling] def toActionBuilder = CasperJSActionBuilder(attributes.requestName, this.build)
 

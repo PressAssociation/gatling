@@ -19,13 +19,13 @@ import io.gatling.core.action.Interruptable
 import io.gatling.core.session.{ Expression, Session }
 import akka.actor.{ Props, ActorRef }
 import io.gatling.core.validation.Failure
-import org.casperjs.CasperJSRequest
+import org.casperjs.{ CasperJSRequestFactory, CasperJSRequest }
 import io.gatling.js.async.AsyncCasperJSActor
 
 /**
  * @author Bob Browning
  */
-class CasperJSAction(val requestName: Expression[String], val next: ActorRef, val request: CasperJSRequest) extends Interruptable {
+class CasperJSAction(val requestName: Expression[String], val next: ActorRef, val requestFactory: CasperJSRequestFactory) extends Interruptable {
 
 	val asyncCasperJSActorFactory = AsyncCasperJSActor.newAsyncCasperJSActorFactory(next) _
 
@@ -37,7 +37,7 @@ class CasperJSAction(val requestName: Expression[String], val next: ActorRef, va
 	 */
 	def execute(session: Session) {
 
-		def sendRequest(resolvedRequestName: String) = {
+		def sendRequest(resolvedRequestName: String, request: CasperJSRequest) = {
 			logger.info(s"Sending request '$resolvedRequestName': scenario '${session.scenarioName}', userId #${session.userId}")
 
 			val actor = context.actorOf(Props(asyncCasperJSActorFactory(resolvedRequestName)(session)))
@@ -45,9 +45,11 @@ class CasperJSAction(val requestName: Expression[String], val next: ActorRef, va
 			actor ! request
 		}
 
+		val request = requestFactory.build(session)
+
 		val execution = for {
 			resolvedRequestName <- requestName(session)
-		} yield sendRequest(resolvedRequestName)
+		} yield sendRequest(resolvedRequestName, request)
 
 		execution match {
 			case Failure(message) =>
