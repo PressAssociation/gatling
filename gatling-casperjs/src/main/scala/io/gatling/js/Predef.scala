@@ -18,15 +18,19 @@ package io.gatling.js
 import io.gatling.core.session._
 import io.gatling.js.request.builder.CasperJSRequestBuilder
 import io.gatling.js.action.CasperJSActionBuilder
+import org.casperjs.CasperJSRequest
+import io.gatling.core.validation.Validation
 
 /**
  * @author Bob Browning
  */
 object Predef {
 
-  type CasperJSOption = Pair[String, Expression[String]]
+	type RequestBuilder = (Session) => Validation[CasperJSRequest]
 
-  implicit def requestBuilder2ActionBuilder(requestBuilder: CasperJSRequestBuilder): CasperJSActionBuilder = requestBuilder.toActionBuilder
+	type CasperJSOption = Pair[String, Expression[String]]
+
+	implicit def requestBuilder2ActionBuilder(requestBuilder: CasperJSRequestBuilder): CasperJSActionBuilder = requestBuilder.toActionBuilder
 
 	def casperjs(requestName: Expression[String], pathToFile: String) = CasperJSRequestBuilder.casperjs(requestName, pathToFile)
 

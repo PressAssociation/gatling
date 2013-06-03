@@ -52,6 +52,17 @@ class AsyncCasperJSActor(var session: Session, next: ActorRef, requestName: Stri
 
 		if (status == KO) {
 			logger.warn(s"Request '$requestName' failed : ${errorMessage.getOrElse("")}")
+			if (!response.out.isEmpty) {
+				logger.warn("*****************************************************************************")
+				logger.warn(s"Request: ${requestName} - ${session.userId} Output:")
+				logger.warn(response.out.mkString("\n"))
+				logger.warn("*****************************************************************************")
+			}
+			if (!response.err.isEmpty) {
+				logger.warn(s"Request: ${requestName} - ${session.userId} Error:")
+				logger.warn(response.err.mkString("\n"))
+				logger.warn("*****************************************************************************")
+			}
 		}
 
 		DataWriter.tell(RequestMessage(session.scenarioName, session.userId, session.groupStack, requestName,
